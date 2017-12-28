@@ -1,4 +1,4 @@
-#Swoole-coroutine
+# Swoole-coroutine
 
 [**docker-hub**](https://hub.docker.com/r/twosee/swoole-coroutine/) 
 
@@ -21,10 +21,10 @@ docker run -d --name=swoole \
 ## Introduction
 
 - 基于最新PHP7.1-cli版本
-- 使用swoole2.X最新稳定版本构建
+- 使用swoole2.X最新版本构建,提供各种组合环境["latest", "stable", "memcached"]
 - 已安装 ["GD", "mcrypt", "iconv", "pdo_mysql", "dom", "xml", "curl", "swoole"]等PHP扩展
 - 已开启["coroutine", "openssl", "http2", "async-redis", "mysqlnd"]扩展
-- 纯环境 , 0冗余 , 无任何php代码
+- 纯环境 , 0冗余 , 绿色清洁 , 无任何php代码
 - 默认中国上海时区
 
 ---

@@ -1,10 +1,10 @@
-# Swoole-coroutine
+## Swoole-coroutine
 
 [**docker-hub**](https://hub.docker.com/r/twosee/swoole-coroutine/) 
 
 [**github**](https://github.com/twose/swoole-coroutine-docker)
 
-## Usage
+### Usage
 
 ```Bash
 docker pull twosee/swoole-coroutine
@@ -18,7 +18,7 @@ docker run -d --name=swoole \
  php /app/server.php start
 ```
 
-## Introduction
+### Introduction
 
 - 基于最新PHP7.1-cli版本
 - 使用swoole2.X最新版本构建,提供各种组合环境["latest", "stable", "memcached"]
@@ -35,11 +35,12 @@ docker run -d --name=swoole \
 - this container has no PHP code or framework included
 - Asia/Shanghai timezone default (you can remove it on first RUN line)
 
-## Version
+### Version
 
 | DIR        | INTRO                                    |
 | ---------- | ---------------------------------------- |
-| /          | Latest release version                   |
+| /master    | Latest master version (Experimental type) |
+| /release   | Latest release version                   |
 | /stable    | Latest stable release version            |
 | /memcached | Latest release version with Memcached installed |
-
+| /1.9       | Latest version from branch 1.9.x         |

@@ -33,14 +33,15 @@ docker run -d --name=swoole \
 - PHP extension installed: ["GD", "mcrypt", "iconv", "pdo_mysql", "dom", "xml", "curl", "swoole"]
 - enable ["coroutine", "openssl", "http2", "async-redis", "mysqlnd"]
 - this container has no PHP code or framework included
-- Asia/Shanghai timezone default (you can remove it on first RUN line)
+- Asia/Shanghai timezone default (you can remove it on last RUN line)
 
 ### Version
 
-| DIR        | INTRO                                    |
-| ---------- | ---------------------------------------- |
-| /master    | Latest master version (Experimental type) |
-| /release   | Latest release version                   |
-| /stable    | Latest stable release version            |
-| /memcached | Latest release version with Memcached installed |
-| /1.9       | Latest version from branch 1.9.x         |
+| DIR        | INTRO                                    | Tag       |
+| ---------- | ---------------------------------------- | --------- |
+| /master    | Latest master version (Experimental type) | latest    |
+| /release   | Latest release version                   | release   |
+| /stable    | Latest stable release version            | stable    |
+| /memcached | Latest release version with Memcached installed | memcached |
+| /1.9       | Latest version from branch 1.9.x         | 1.9       |
+

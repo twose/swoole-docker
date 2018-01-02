@@ -26,6 +26,7 @@ datadir = /var/lib/mysql
 port = 3306
 server-id = 1
 default-time-zone = +8:00
+log_timestamps = SYSTEM
 
 character-set-server = utf8mb4
 collation-server=utf8mb4_unicode_ci

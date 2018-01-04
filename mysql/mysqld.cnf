@@ -5,7 +5,7 @@
 # *** upgrade to a newer version of MySQL.
 
 [client]
-port=3306
+port = 3306
 socket=/var/run/mysqld/mysqld.sock
 
 [mysqld]
@@ -29,11 +29,21 @@ default-time-zone = +8:00
 log_timestamps = SYSTEM
 
 character-set-server = utf8mb4
-collation-server=utf8mb4_unicode_ci
+collation-server = utf8mb4_unicode_ci
+
 socket = /var/run/mysqld/mysqld.sock
-log-error = /var/log/mysql/error.log
 pid-file = /var/run/mysqld/mysqld.pid
+
+log-error = /var/lib/mysql/error.log
 general_log = 1
+general_log_file = /var/lib/mysql/general.log
+slow_query_log = 1
+slow_query_log_file = /var/lib/mysql/slow.log
+long_query_time = 1
+log_slow_admin_statements = 1
+log_queries_not_using_indexes = 1
+
+
 skip-name-resolve
 #skip-networking
 back_log = 500
@@ -86,10 +96,10 @@ wait_timeout = 28800
 # read_rnd_buffer_size = 2M
 
 # Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
+symbolic-links = 0
 
 # Recommended in standard MySQL setup
-sql_mode=NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER,STRICT_TRANS_TABLES
+sql_mode = NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER,STRICT_TRANS_TABLES
 
 [mysqldump]
 quick

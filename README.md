@@ -44,4 +44,52 @@ docker run -d --name=swoole \
 | /stable    | Latest stable release version            | stable    |
 | /memcached | Latest release version with Memcached installed | memcached |
 | /1.9       | Latest version from branch 1.9.x         | 1.9       |
+| /mysql     | It's a MySQL's docker                    | mysql     |
+
+
+
+### Docker-compose
+
+Swoole + mysql
+
+```yaml
+version: '3.4'
+services:
+  swoole:
+    image: "twosee/swoole-coroutine"
+    ports:
+      - "127.0.0.1:9501:9501"
+    volumes:
+      - ./src:/app/src:rw
+    restart: always
+    depends_on:
+      - mysql
+    command: php /app/src/server.php
+
+  mysql:
+    image: "twosee/swoole-coroutine:mysql"
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ./data/mysql/data:/var/lib/mysql:rw
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: forTest
+      MYSQL_DATABASE: test
+      MYSQL_USER: php
+      MYSQL_PASSWORD: forTest
+```
+You can see [mysqld.cnf](https://github.com/twose/swoole-coroutine-docker/tree/master/mysql).
+
+```php
+$options = [
+  'host'     => 'test', //So there.
+  'port'     => 3306,
+  'user'     => 'php',
+  'password' => 'forTest',
+  'database' => 'custed'
+];
+$db = new \Swoole\Coroutine\Mysql();
+$db->connect($options);
+```
 

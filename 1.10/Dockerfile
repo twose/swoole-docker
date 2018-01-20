@@ -35,7 +35,8 @@ RUN cd /root && \
     --enable-async-redis \
     --enable-mysqlnd && \
     make && make install && \
-    docker-php-ext-enable swoole
+    docker-php-ext-enable swoole && \
+    echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini
 
 # memcached module  
 RUN apt-get install -y libmemcached-dev && \

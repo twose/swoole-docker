@@ -6,7 +6,8 @@
 
 [client]
 port = 3306
-socket=/var/run/mysqld/mysqld.sock
+socket = /var/run/mysqld/mysqld.sock
+pid-file = /var/run/mysqld/mysqld.pid
 
 [mysqld]
 
@@ -30,9 +31,6 @@ log_timestamps = SYSTEM
 
 character-set-server = utf8mb4
 collation-server = utf8mb4_unicode_ci
-
-socket = /var/run/mysqld/mysqld.sock
-pid-file = /var/run/mysqld/mysqld.pid
 
 log-error = /var/lib/mysql/error.log
 general_log = 1

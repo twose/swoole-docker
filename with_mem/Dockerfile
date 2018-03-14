@@ -23,9 +23,13 @@ RUN docker-php-ext-install pdo_mysql mysqli iconv mbstring json opcache && \
 #install redis
 RUN pecl install redis && docker-php-ext-enable redis
 
+# install composer
+RUN curl -sS https://getcomposer.org/installer | php && \
+mv composer.phar /usr/local/bin/composer && \
+composer self-update --clean-backups
+
 # install swoole
-#TIP: it always get last stable version of swoole coroutine.
-RUN cd /root && \
+RUN cd /tmp && \
     curl -o /tmp/swoole-releases https://github.com/swoole/swoole-src/releases -L && \
     cat /tmp/swoole-releases | grep 'href=".*v2.*.tar.gz"' | head -1 | \
     awk -F '"' ' {print "curl -o /tmp/swoole.tar.gz https://github.com"$2" -L" > "/tmp/swoole.download"}' && \
@@ -40,24 +44,20 @@ RUN cd /root && \
     --enable-mysqlnd && \
     make && make install && \
     docker-php-ext-enable swoole && \
-    echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini
+    echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini && \
+    rm -rf /tmp/*
 
 # memcached module  
 RUN apt-get install -y libmemcached-dev && \
  curl -o /tmp/memcached.tar.gz https://github.com/php-memcached-dev/php-memcached/archive/php7.tar.gz -L && \
-#RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcached/archive/2.2.0.zip -L
- cd /root && tar zxvf /tmp/memcached.tar.gz && \
-# cd php-memcached-2.2.0 && \
+ cd /tmp && tar zxvf /tmp/memcached.tar.gz && \
  cd php-memcached-php7 && \
  phpize && ./configure --enable-sasl && make && make install && \
- cd /root && rm -rf /root/php-memcached-* && \
  echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini  && \
- echo "memcached.use_sasl=1" >> /usr/local/etc/php/conf.d/memcached.ini
+ echo "memcached.use_sasl=1" >> /usr/local/etc/php/conf.d/memcached.ini && \
+ rm -rf /tmp/*
 
-# Clean Up
-RUN rm -rf /tmp/*  && \
-    rm -rf `ls /root -F | grep "/$" | sed 's/\/$//g' | sed -e 's/^/\/root\//g'`
-
-# Set China timezone
+# set China timezone
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo 'Asia/Shanghai' > /etc/timezone
+    echo 'Asia/Shanghai' > /etc/timezone && \
+    echo "[Date]\ndate.timezone=Asia/Shanghai" > /usr/local/etc/php/conf.d/timezone.ini

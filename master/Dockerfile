@@ -2,7 +2,7 @@ FROM php:latest
 
 MAINTAINER twosee <twose@qq.com>
 
-# Install modules : GD iconv
+# install modules : GD iconv
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -23,9 +23,13 @@ RUN docker-php-ext-install pdo_mysql mysqli iconv mbstring json opcache && \
 #install redis
 RUN pecl install redis && docker-php-ext-enable redis
 
+# install composer
+RUN curl -sS https://getcomposer.org/installer | php && \
+mv composer.phar /usr/local/bin/composer && \
+composer self-update --clean-backups
+
 # install swoole
-#TIP: it always get last stable version of swoole coroutine.
-RUN cd /root && \
+RUN cd /tmp && \
     curl -o /tmp/swoole.tar.gz https://github.com/swoole/swoole-src/archive/master.tar.gz -L && \
     tar zxvf /tmp/swoole.tar.gz && cd swoole-src* && \
     phpize && \
@@ -37,12 +41,10 @@ RUN cd /root && \
     --enable-mysqlnd && \
     make && make install && \
     docker-php-ext-enable swoole && \
-    echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini
+    echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini && \
+    rm -rf /tmp/*
 
-# Clean Up
-RUN rm -rf /tmp/*  && \
-    rm -rf `ls /root -F | grep "/$" | sed 's/\/$//g' | sed -e 's/^/\/root\//g'`
-
-# Set China timezone
+# set China timezone
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo 'Asia/Shanghai' > /etc/timezone
+    echo 'Asia/Shanghai' > /etc/timezone && \
+    echo "[Date]\ndate.timezone=Asia/Shanghai" > /usr/local/etc/php/conf.d/timezone.ini

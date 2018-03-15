@@ -26,7 +26,8 @@ RUN pecl install redis && docker-php-ext-enable redis
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php && \
 mv composer.phar /usr/local/bin/composer && \
-composer self-update --clean-backups
+composer self-update --clean-backups && \
+apt-get install -y zip unzip
 
 # install swoole
 RUN cd /tmp && \

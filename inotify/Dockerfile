@@ -26,7 +26,8 @@ RUN apt-get install -y inotify-tools
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php && \
 mv composer.phar /usr/local/bin/composer && \
-composer self-update --clean-backups
+composer self-update --clean-backups && \
+apt-get install -y zip unzip
 
 # install node npm
 RUN apt-get install -my wget gnupg && \

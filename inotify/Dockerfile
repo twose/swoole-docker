@@ -29,7 +29,9 @@ mv composer.phar /usr/local/bin/composer && \
 composer self-update --clean-backups
 
 # install node npm
-RUN apt-get install -y nodejs && \
+RUN apt-get install -my wget gnupg && \
+curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
+apt-get install -y nodejs && \
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 # install git

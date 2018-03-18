@@ -31,8 +31,7 @@ composer self-update --clean-backups && \
 apt-get install -y zip unzip
 
 # install swoole
-#TIP: it always get last stable version of swoole coroutine.
-RUN cd /tmp && \
+RUN cd /root && \
     curl -o /tmp/swoole.tar.gz https://github.com/swoole/swoole-src/archive/1.9.tar.gz -L && \
     tar zxvf /tmp/swoole.tar.gz && cd swoole-src* && \
     phpize && \
@@ -44,17 +43,8 @@ RUN cd /tmp && \
     make && make install && \
     docker-php-ext-enable swoole && \
     echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini && \
+    apt-get install -y gdb && \
     rm -rf /tmp/*
-
-# memcached module  
-RUN apt-get install -y libmemcached-dev && \
- curl -o /tmp/memcached.tar.gz https://github.com/php-memcached-dev/php-memcached/archive/php7.tar.gz -L && \
- cd /root && tar zxvf /tmp/memcached.tar.gz && \
- cd php-memcached-php7 && \
- phpize && ./configure --enable-sasl && make && make install && \
- cd /root && rm -rf /root/php-memcached-* && \
- echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini  && \
- echo "memcached.use_sasl=1" >> /usr/local/etc/php/conf.d/memcached.ini
 
 # set China timezone
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \

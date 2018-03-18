@@ -31,7 +31,7 @@ composer self-update --clean-backups && \
 apt-get install -y zip unzip
 
 # install swoole
-RUN cd /tmp && \
+RUN cd /root && \
     curl -o /tmp/swoole.tar.gz https://github.com/swoole/swoole-src/archive/master.tar.gz -L && \
     tar zxvf /tmp/swoole.tar.gz && cd swoole-src* && \
     phpize && \
@@ -44,6 +44,7 @@ RUN cd /tmp && \
     make && make install && \
     docker-php-ext-enable swoole && \
     echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini && \
+    apt-get install -y gdb && \
     rm -rf /tmp/*
 
 # set China timezone

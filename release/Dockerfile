@@ -32,7 +32,7 @@ apt-get install -y zip unzip
 
 # install swoole
 #TIP: it always get last stable version of swoole coroutine.
-RUN cd /tmp && \
+RUN cd /root && \
     curl -o /tmp/swoole-releases https://github.com/swoole/swoole-src/releases -L && \
     cat /tmp/swoole-releases | grep 'href=".*v2.*.tar.gz"' | head -1 | \
     awk -F '"' ' {print "curl -o /tmp/swoole.tar.gz https://github.com"$2" -L" > "/tmp/swoole.download"}' && \

@@ -32,7 +32,7 @@ apt-get install -y zip unzip
 
 # install swoole
 RUN cd /root && \
-    curl -o /tmp/swoole.tar.gz https://github.com/swoole/swoole-src/archive/1.9.tar.gz -L && \
+    curl -o /tmp/swoole.tar.gz https://github.com/swoole/swoole-src/archive/1.x-lts.tar.gz -L && \
     tar zxvf /tmp/swoole.tar.gz && cd swoole-src* && \
     phpize && \
     ./configure \

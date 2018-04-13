@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
         libpng-dev \
         openssl \
         libssh-dev \
+        libpcre3 \
+        libpcre3-dev \
         libnghttp2-dev \
         libhiredis-dev \
     && docker-php-ext-install iconv \

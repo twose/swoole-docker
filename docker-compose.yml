@@ -34,3 +34,13 @@ services:
     sysctls:
         net.core.somaxconn: 65535
     restart: always
+
+  inotify:
+    image: "twosee/swoole-coroutine:inotify"
+    volumes:
+      - ./:/app:rw
+    restart: always
+    environment:
+      APP_ENV: dev # or product
+    working_dir: /app/util
+    command: /bin/bash inotify.sh

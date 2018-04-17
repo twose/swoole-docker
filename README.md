@@ -26,34 +26,34 @@ docker-compose up
 
 - 基于最新PHP7.2-cli版本
 - 使用swoole2.X最新版本构建, 所有功能火力全开
-- 提供Swoole的绝佳搭档: Mysql和Redis, 配合docker-compose, 实现开箱即用
+- 提供Swoole的绝佳搭档:` MySQL`, `Redis`, `Inotify`, 配合`docker-compose`, 实现开箱即用
 - 已安装 ["GD", "iconv", "pdo_mysql", "dom", "xml", "curl", "swoole"]等PHP扩展
-- 已开启["coroutine", "openssl", "http2", "async-redis", "mysqlnd"]扩展
+- 已开启["coroutine", "openssl", "http2", "async-redis", "mysqlnd", "swoole-serialize"]等所有功能
 - 纯环境 , 0冗余 , 绿色清洁 , 无任何php代码
 - 默认中国上海时区
+- inotify提供自动化热更新等支持
 
 ---
 
 - Based on PHP7.2-cli
 - use swoole 2.* latest stable version, All functions are fully open
-- Provide the perfect partner for Swoole such as MySQL and Redis images, Out of the box.
+- Provide the perfect partner for Swoole such as ` MySQL`, `Redis`, `Inotify` images, you can also use `docker-compose`, Out of the box.
 - PHP extension installed: ["GD", "iconv", "pdo_mysql", "dom", "xml", "curl", "swoole"]
-- enable ["coroutine", "openssl", "http2", "async-redis", "mysqlnd"]
+- enable ["coroutine", "openssl", "http2", "async-redis", "mysqlnd", "swoole-serialize"]
 - this container has no PHP code or framework included
-- Asia/Shanghai timezone default (you can remove it on last RUN line)
+- Asia/Shanghai timezone default (you can remove it on the last RUN line)
+- Inotify provides hot auto updates and other support
 
 ### Version
 
-| DIR       | INTRO                                    | Tag       |
-| --------- | ---------------------------------------- | --------- |
-| /master   | Latest master version (Experimental type) | latest    |
-| /mysql    | It's a perfect MySQL's docker            | mysql     |
-| /redis    | It's a perfect Redis's docker            | redis     |
-| /release  | Latest release version                   | release   |
-| /1.10     | Latest version from branch 1.10.x        | 1.10      |
-| /with_mem | Latest release version with Memcached installed | memcached |
-
-
+| DIR      | INTRO                                                | Tag     |
+| -------- | ---------------------------------------------------- | ------- |
+| /master  | Latest master version (Experimental type)            | latest  |
+| /mysql   | It's a perfect MySQL's docker                        | mysql   |
+| /redis   | It's a perfect Redis's docker                        | redis   |
+| /inotify | inotify, composer, git, node, to support hot updates | inotify |
+| /release | Latest release version                               | release |
+| /1.x-lts | Latest version from branch 1.x-lts                   | 1.x-lts |
 
 ### Docker-compose
 
@@ -96,6 +96,16 @@ services:
     sysctls:
         net.core.somaxconn: 65535
     restart: always
+
+  inotify:
+    image: "twosee/swoole-coroutine:inotify"
+    volumes:
+      - ./:/app:rw
+    restart: always
+    environment:
+      APP_ENV: dev # or product
+    working_dir: /app/util
+    command: /bin/bash inotify.sh
 ```
 You can see [mysqld.cnf](https://github.com/twose/swoole-coroutine-docker/tree/master/mysql).
 
@@ -116,4 +126,3 @@ $redis = new \Swoole\Coroutine\Redis();
 $redis->connect('redis', 6379);
 $val = $redis->get('foo');
 ```
-

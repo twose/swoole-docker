@@ -20,7 +20,8 @@ RUN apt-get update && apt-get install -y \
         git && \
         docker-php-ext-install iconv && \
         docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-        docker-php-ext-install gd
+        docker-php-ext-install gd && \
+        apt autoremove && apt clean
 
 # install php pdo_mysql opcache
 # WARNING: Disable opcache-cli if you run you php
@@ -36,6 +37,10 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     composer self-update --clean-backups
 
+# dev-tools for master
+RUN apt-get install -y gdb valgrind && \
+    apt autoremove && apt clean
+
 # install swoole
 RUN cd /root && \
     curl -o /tmp/swoole.tar.gz https://github.com/swoole/swoole-src/archive/master.tar.gz -L && \
@@ -50,7 +55,6 @@ RUN cd /root && \
     make && make install && \
     docker-php-ext-enable swoole && \
     echo "swoole.fast_serialize=On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole-serialize.ini && \
-    apt-get install -y gdb && \
     rm -rf /tmp/*
 
 # set China timezone

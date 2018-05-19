@@ -25,7 +25,7 @@ docker-compose up
 ### Introduction
 
 - 基于最新PHP7.2-cli版本
-- 使用swoole2.X~3.X最新版本构建, 所有功能火力全开
+- 使用swoole1.X~4.X(libco)最新版本构建, 所有功能火力全开
 - 提供Swoole的绝佳搭档:` MySQL`, `Redis`, `Inotify`, 配合`docker-compose`, 实现开箱即用
 - 已安装 ["GD", "iconv", "pdo_mysql", "dom", "xml", "curl", "swoole"]等PHP扩展
 - 已开启["coroutine", "openssl", "http2", "async-redis", "mysqlnd", "swoole-serialize"]等所有功能
@@ -36,7 +36,7 @@ docker-compose up
 ---
 
 - Based on PHP7.2-cli
-- use swoole 2.* and 3.* latest stable version, All functions are fully open
+- use swoole 1.*, 2.* and 4.*(libco) latest stable version, All functions are fully open
 - Provide the perfect partner for Swoole such as ` MySQL`, `Redis`, `Inotify` images, you can also use `docker-compose`, Out of the box.
 - PHP extension installed: ["GD", "iconv", "pdo_mysql", "dom", "xml", "curl", "swoole"]
 - enable ["coroutine", "openssl", "http2", "async-redis", "mysqlnd", "swoole-serialize"]

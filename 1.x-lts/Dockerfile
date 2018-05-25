@@ -18,13 +18,21 @@ RUN apt-get update && apt-get install -y \
         zip \
         unzip \
         git && \
-        docker-php-ext-install iconv && \
-        docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-        docker-php-ext-install gd
+        apt autoremove && apt clean
 
 # install php pdo_mysql opcache
 # WARNING: Disable opcache-cli if you run you php
-RUN docker-php-ext-install pdo_mysql mysqli iconv mbstring json opcache && \
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-install \
+    iconv \
+    gd \
+    pdo_mysql \
+    mysqli \
+    iconv \
+    mbstring \
+    json \
+    opcache \
+    pcntl && \
     echo "opcache.enable_cli=0" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 #install redis

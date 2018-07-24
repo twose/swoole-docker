@@ -59,6 +59,7 @@ RUN cd /root && \
     --enable-openssl  \
     --enable-http2  \
     --enable-async-redis \
+    --enable-sockets \
     --enable-mysqlnd && \
     make && make install && \
     docker-php-ext-enable swoole && \

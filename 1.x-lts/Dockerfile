@@ -4,6 +4,7 @@ MAINTAINER twosee <twose@qq.com>
 
 # install modules : GD iconv
 RUN apt-get update && apt-get install -y \
+        procps \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \

@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
 # install php pdo_mysql opcache
 # WARNING: Disable opcache-cli if you run you php
 RUN docker-php-ext-install pdo_mysql mysqli iconv mbstring json opcache && \
-    echo "opcache.enable_cli=0" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+    echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 #install redis
 RUN pecl install redis && docker-php-ext-enable redis

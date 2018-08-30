@@ -50,7 +50,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 #TIP: it always get last stable version of swoole coroutine.
 RUN cd /root && \
     curl -o /tmp/swoole-releases https://github.com/swoole/swoole-src/releases -L && \
-    cat /tmp/swoole-releases | grep 'href=".*v2.*.tar.gz"' | head -1 | \
+    cat /tmp/swoole-releases | grep 'href=".*archive.*.tar.gz"' | head -1 | \
     awk -F '"' ' {print "curl -o /tmp/swoole.tar.gz https://github.com"$2" -L" > "/tmp/swoole.download"}' && \
     sh /tmp/swoole.download && \
     tar zxvf /tmp/swoole.tar.gz && cd swoole-src* && \

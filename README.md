@@ -25,7 +25,7 @@ docker-compose up
 ### Introduction
 
 - 基于最新PHP7.2-cli版本
-- 使用swoole1.X~4.X(libco)最新版本构建, 所有功能火力全开
+- 使用swoole1.X~4.X最新版本构建, 所有功能火力全开
 - 提供Swoole的绝佳搭档:` MySQL`, `Redis`, `Inotify`, 配合`docker-compose`, 实现开箱即用
 - 已安装 ["GD", "iconv", "pdo_mysql", "dom", "xml", "curl", "swoole"]等PHP扩展
 - 已开启["coroutine", "openssl", "http2", "async-redis", "mysqlnd", "swoole-serialize"]等所有功能
@@ -49,7 +49,8 @@ docker-compose up
 | DIR      | INTRO                                                | Tag     |
 | -------- | ---------------------------------------------------- | ------- |
 | /master  | Latest master version (Experimental type)            | latest  |
-| /mysql   | It's a perfect MySQL's docker                        | mysql   |
+| /mysql   | It's a perfect MySQL8's docker                       | mysql   |
+| /mysql5  | It's a perfect MySQL5's docker                       | mysql5  |
 | /redis   | It's a perfect Redis's docker                        | redis   |
 | /inotify | inotify, composer, git, node, to support hot updates | inotify |
 | /release | Latest release version                               | release |

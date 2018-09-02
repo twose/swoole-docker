@@ -94,6 +94,9 @@ wait_timeout = 28800
 # sort_buffer_size = 2M
 # read_rnd_buffer_size = 2M
 
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links = 0
+
 # Recommended in standard MySQL setup
 sql_mode = NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER,STRICT_TRANS_TABLES
 

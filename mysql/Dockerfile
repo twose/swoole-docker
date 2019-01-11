@@ -1,6 +1,6 @@
 FROM mysql
 
-# better conf
+# Better conf
 COPY mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # Set China timezone
